@@ -41,3 +41,28 @@ Key Difference:
 - Engineering: Manufacturing Defects detection
 - Econometrics: Reinforcement Learning on Taxation. [SalesForce AI Economist](https://www.salesforce.com/company/news-press/stories/2020/4/salesforce-ai-economist/)
 
+
+# Chapter 1 Summary [D2L Introduction](https://d2l.ai/chapter_introduction/index.html)
+
+Building solutions based on [First Principles](https://fs.blog/2018/04/first-principles/) help in solving complex problems. Still there are few problems that become harder to solve like Problems that are dynamic example: Identifying desired object in an image. A specific object i.e, Rose Flower, can be dynamic in nature, in terms of size, shape, color intensity etc..,. Our scope of creating algorithms are restrictive in terms of our own experience and imagination. Therefore we try to take the help of Machine Learning to help design our systems that learn based on observations that can scale to millions of images where a normal human cannot.
+
+The Key components in ML are:
+-   Data
+-   Models
+-   Objective Functions
+-   Optimization Algorithms
+
+## Data:
+Without Data we cannot have systems learn. There are different kinds of data that can be used for systems to train such as tabluar data, images, audio, videos, text.
+
+All the data are to be converted to numerical format that can be used to train the systems.
+
+## Models:
+Models are the Algorithms that we run on data which inturn learn on the data by adjusting parameters internally. We have various types of Models that are used based on type of requirement and the kind of Data we work on.
+
+## Objective Functions:
+These are also called as Cost Function / Loss Function that tell us how extent are our models are deviating from ground truth values. Technically, we strive to achieve global optima in our objective Function.
+
+## Optimization Algorithms:
+These help to provide feedback to the Algorithms from Loss Functions by correcting Parameters to achieve global optima.
+

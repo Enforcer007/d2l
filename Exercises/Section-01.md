@@ -66,3 +66,7 @@ These are also called as Cost Function / Loss Function that tell us how extent a
 ## Optimization Algorithms:
 These help to provide feedback to the Algorithms from Loss Functions by correcting Parameters to achieve global optima.
 
+There are various types of Machine Learning:
+-   Supervised Learning
+-   Unsupervised Learning
+-   Reinforcement Learning

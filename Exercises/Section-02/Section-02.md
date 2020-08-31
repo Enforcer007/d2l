@@ -7,6 +7,7 @@
   - [2.1 Data Manipulation](#21-data-manipulation)
   - [2.2 Data PreProcessing](#22-data-preprocessing)
   - [2.3 Linear Algebra](#23-linear-algebra)
+  - [2.4 Calculus](#24-calculus)
 
 ## [2.1 Data Manipulation](https://d2l.ai/chapter_preliminaries/ndarray.html#exercises)
 
@@ -241,5 +242,63 @@ Let $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $x_{ij}$ be an element in $\mathb
     This is the L2 norm the signifies magnitude of the Tensor.
     ```
 
+
+## [2.4 Calculus](https://d2l.ai/chapter_preliminaries/calculus.html)
+    1. Plot the function  y=f(x)=x3−1x  and its tangent line when  x=1.
+
+Answer:\
+```
+import matplotlib.pyplot as plt
+import numpy as np
+
+def power_func(x,n):
+    return x**n
+
+def func(x):
+    return power_func(x,3) - power_func(x,-1)
+
+def derivative_func(x):
+    return 4*x - 4
+
+x = np.arange(0.1,3,0.1)
+
+y_func, y_derivefunc = func(x), derivative_func(x)
+
+axes = plt.gca()
+axes.cla()
+for x,y, fmt in zip([x,x],[y_func,y_derivefunc],('-', 'm--', 'g-.', 'r:')):
+    axes.plot(x,y,fmt)
+set_axes(None, None, None, None, 'linear', 'linear', ['f(x)','Tangent Line at x=1']) # defined in this chapter
+plt.savefig("Tangent-Line Plot",format="png")
+```
+
+![Function and it's derivative Plot](./Tangent-Line-Plot.png)
+
+    2. Find the gradient of the function:
+
+$\mathbf{f(x)=3x^2+5e^{x^2}}$
+
+
+**Answer**:\
+    The gradient of the function is:
+    $\mathbf{f'(x)=6x+10x^3e^{x^2}}$
+
+
+    3. What is the gradient of:
+
+$\mathbf{f(x)=||x||_2}$
+
+**Answer**:\
+$\mathbf{f'(x)=|x|/||x||_2}$
+
+    4. Chain Rule for the case where 
+
+$u=f(x,y,z),\; x=x(a,b),\; y=y(a,b),\; z=z(a,b)$
+
+** Answer **:\
+
+$${\frac{\partial f}{\partial a}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial a}}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial a}+\frac{\partial f}{\partial z}\frac{\partial z}{\partial a}$$
+
+$${\frac{\partial f}{\partial b}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial b}}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial b}+\frac{\partial f}{\partial z}\frac{\partial z}{\partial b}$$
 
 

@@ -8,6 +8,7 @@
   - [2.2 Data PreProcessing](#22-data-preprocessing)
   - [2.3 Linear Algebra](#23-linear-algebra)
   - [2.4 Calculus](#24-calculus)
+  - [2.5 Automatic Differentiation](#25-automatic-differentiation)
 
 ## [2.1 Data Manipulation](https://d2l.ai/chapter_preliminaries/ndarray.html#exercises)
 
@@ -300,5 +301,109 @@ $u=f(x,y,z),\; x=x(a,b),\; y=y(a,b),\; z=z(a,b)$
 $${\frac{\partial f}{\partial a}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial a}}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial a}+\frac{\partial f}{\partial z}\frac{\partial z}{\partial a}$$
 
 $${\frac{\partial f}{\partial b}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial b}}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial b}+\frac{\partial f}{\partial z}\frac{\partial z}{\partial b}$$
+
+
+
+## [2.5 Automatic Differentiation](https://d2l.ai/chapter_preliminaries/autograd.html)
+
+    1.Why is the second derivative much more expensive to compute than the first derivative?
+
+**Answer**:\
+First Order Derivative of a scalar valued function for a given vector x is given as followed:
+
+Let $\mathbf{x}\in\mathbb{R}^{n}$ and  $f:\mathbb{R^n \rightarrow R }$ then
+
+$$\nabla_{\mathbf{x}}=\bigg[\frac{\partial f}{\partial x_1},
+\frac{\partial f}{\partial x_2},
+\frac{\partial f}{\partial x_3},
+\frac{\partial f}{\partial x_4},
+\ldots,
+\frac{\partial f}{\partial x_n} \bigg]$$
+
+this is a matrix of order 1xn elements.
+
+Let's have second order derivative which is given by differentiating $\nabla_x$ over $x_1,\ldots,x_n$
+$$\nabla^2_{\mathbf{x}}=\begin{bmatrix}
+    \frac{\partial^2 f}{\partial x_1^2}&
+\frac{\partial^2 f}{\partial x_1x_2}&
+\cdots&
+\frac{\partial f}{\partial x_1x_n}\\
+\frac{\partial^2 f}{\partial x_2x_1}&
+\frac{\partial^2 f}{\partial x_2^2}&
+\cdots&
+\frac{\partial f}{\partial x_2x_n}\\
+\vdots&\vdots&\ddots&\vdots\\
+\frac{\partial^2 f}{\partial x_nx_1}&
+\frac{\partial^2 f}{\partial x_nx_2}&
+\cdots&
+\frac{\partial f}{\partial x_n^2}\\
+\end{bmatrix}$$
+
+this is a matrix of order nxn, also each element is differentiated twice, therefore the order of computation is $n^4$ compared to first-order computation.
+
+Therefore the computation is large
+
+    2. After running the function for backpropagation, immediately run it again and see what happens.
+
+**Answer**:
+None (Pls give PR if you know it)
+
+    3. In the control flow example where we calculate the derivative of d with respect to a, what would happen if we changed the variable a to a random vector or matrix. At this point, the result of the calculation f(a) is no longer a scalar. What happens to the result? How do we analyze this?
+
+**Answer**:\
+The gradient of vector output function is a vector. The result is similar to that of scalar except that the result now is a vector having same gradient across the dimension.
+
+    4. Redesign an example of finding the gradient of the control flow. Run and analyze the result.
+
+**Answer**:\
+```
+def f(a):
+    b = a * 2
+    while tf.norm(b) < 1000:
+        b = b ** 2
+    if tf.reduce_sum(b) > 0:
+        c = b*2
+    else:
+        c = 100 * b
+    return c
+```
+Here gradient is proportional to value of 'a'. Therefore the gradients calculate for a vector should be proportional to their magnitudes.
+
+$$a=\begin{bmatrix}
+     0.51526976\\
+     -0.10544211\\
+     2.3910053 
+\end{bmatrix}$$
+
+We obtain gradients that are proportional to the magnitudes with respect to their dimension.
+$$a=\begin{bmatrix}
+     -8.5661167e-01\\
+     -1.0620662e+02\\
+     2.2162100e+05
+\end{bmatrix}$$
+
+   5. Let  f(x)=sin(x) . Plot  f(x)  and  df(x)/dx , where the latter is computed without exploiting that  f′(x)=cos(x).
+
+**Answer**:\
+```
+def sin_func(x):
+    return tf.math.sin(x)
+
+a = tf.Variable(tf.range(0,np.deg2rad(360*2),0.1))
+
+with tf.GradientTape() as t:
+    y_func = sin_func(a)
+
+y_grad = t.gradient(y_func,a)
+
+axes = plt.gca()
+axes.cla()
+for x,y, fmt in zip([a,a],[y_grad,y_func],('-', 'm--', 'g-.', 'r:')):
+    axes.plot(x,y,fmt)
+set_axes(None, None, None, None, 'linear', 'linear', ['f(x)','Derivative']) # Get the function from (https://d2l.ai/chapter_preliminaries/calculus.html)
+
+plt.savefig("Tangent-Line Plot",format="png")
+```
+![Cosine Derivative Plot](./Derivative-Plot.png)
 
 

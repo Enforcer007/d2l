@@ -186,7 +186,7 @@ Let $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $x_{ij}$ be an element in $\mathb
 
 6. Run A / A.sum(axis=1) and see what happens. Can you analyze the reason?
 
-    **Answer**:\
+    **Answer**:
     ```
     X = tf.reshape(tf.range(24),(2,3,4))
     
@@ -233,7 +233,7 @@ Let $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $x_{ij}$ be an element in $\mathb
 
 9. Feed a tensor with 3 or more axes to the linalg.norm function and observe its output. What does this function compute for tensors of arbitrary shape?
 
-    **Answer**:\
+    **Answer**:
     ```
     X = tf.reshape(tf.range(24),(2,3,4))
     X = tf.cast(X,tf.float32)
@@ -249,7 +249,7 @@ Let $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $x_{ij}$ be an element in $\mathb
 ## [2.4 Calculus](https://d2l.ai/chapter_preliminaries/calculus.html)
     1. Plot the function  y=f(x)=x3−1x  and its tangent line when  x=1.
 
-Answer:\
+Answer:
 ```
 import matplotlib.pyplot as plt
 import numpy as np
@@ -298,7 +298,7 @@ $\mathbf{f'(x)=|x|/||x||_2}$
 
 $u=f(x,y,z),\; x=x(a,b),\; y=y(a,b),\; z=z(a,b)$
 
-** Answer **:\
+** Answer **:
 
 $${\frac{\partial f}{\partial a}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial a}}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial a}+\frac{\partial f}{\partial z}\frac{\partial z}{\partial a}$$
 
@@ -357,7 +357,7 @@ The gradient of vector output function is a vector. The result is similar to tha
 
     4. Redesign an example of finding the gradient of the control flow. Run and analyze the result.
 
-**Answer**:\
+**Answer**:
 ```
 def f(a):
     b = a * 2
@@ -386,7 +386,7 @@ $$a=\begin{bmatrix}
 
    5. Let  f(x)=sin(x) . Plot  f(x)  and  df(x)/dx , where the latter is computed without exploiting that  f′(x)=cos(x).
 
-**Answer**:\
+**Answer**:
 ```
 def sin_func(x):
     return tf.math.sin(x)
@@ -430,7 +430,7 @@ Hopefully thinking that they are simple venn diagrams. Therefore please refer to
 
     3. Assume that we have a sequence of random variables, say  A ,  B , and  C , where  B  only depends on  A , and  C  only depends on  B , can you simplify the joint probability  P(A,B,C) ? (Hint: this is a Markov Chain.)
 
-**Answer**:\
+**Answer**:
 $$P(A, B, C) = P(C | A, B) * P(A, B) = P(C | A, B) * [P(B | A) * P(A)] $$
 Credits: [goldpiggy](https://discuss.d2l.ai/u/goldpiggy)
 
